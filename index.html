@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>xhand pro · 双臂解魔方</title>
+  <link rel="stylesheet" href="assets/style.b7e683a225934a40.css">
+<meta name="replay-manifest" content="assets/replay-manifest.bdc1618437cf0765.json">
+<meta name="description" content="xhand pro × Marvin 双臂解魔方。554.66 秒物理仿真，六面实时视图与 4× 交互回放。">
+<link rel="canonical" href="https://evan715823.github.io/xhand-pro-cube-demo/">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+</head>
+<body>
+<noscript><p>请启用 JavaScript 以查看三维回放。</p></noscript>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="#main">xhand pro</a>
+      <nav aria-label="页面导航">
+        <a href="#details" id="open-details">实验信息</a>
+        <a id="download-report" download="xhand_pro_cube_report.json">下载报告</a>
+      </nav>
+    </div>
+  </header>
+  <main id="main">
+    <section class="hero" aria-labelledby="page-title">
+      <div class="hero-top">
+        <div>
+          <p class="product-name">xhand pro × Marvin</p>
+          <h1 id="page-title">双臂解魔方</h1>
+          <p class="subtitle">MuJoCo 仿真回放</p>
+        </div>
+        <div class="readiness">
+          <span id="run-status">正在加载</span>
+          <button id="show-result" disabled>查看还原结果 <span aria-hidden="true">↗</span></button>
+        </div>
+      </div>
+      <dl class="summary-metrics" aria-label="实验结果">
+        <div><dt>仿真用时</dt><dd id="summary-duration">—</dd></div>
+        <div><dt>完成步骤</dt><dd id="summary-steps">—</dd></div>
+        <div><dt>末态对齐误差</dt><dd id="summary-angle">—</dd></div>
+      </dl>
+    </section>
+    <section class="player" aria-label="三维回放">
+      <div class="player-stage">
+      <div class="viewport" id="viewport">
+        <canvas id="canvas" aria-label="拖动可旋转的三维仿真回放"></canvas>
+        <div id="loading"><div class="loading-card"><h2 id="load-title">正在加载回放</h2><progress id="load-progress" max="1" value="0" aria-label="回放下载进度"></progress><p id="load-detail">正在连接</p><button id="load-retry" hidden>重新加载</button></div></div>
+        <div class="viewbar" role="group" aria-label="视角">
+          <button data-view="close" class="active" aria-pressed="true">特写</button>
+          <button data-view="wide" aria-pressed="false">全景</button>
+          <button data-view="top" aria-pressed="false">俯视</button>
+        </div>
+        <div class="scene-bottom">
+          <span id="phase" class="scene-caption">—</span>
+          <div class="scene-options">
+            <label><input type="checkbox" id="follow-cube" checked>跟随魔方</label>
+            <label><input type="checkbox" id="show-contacts">接触点</label>
+          </div>
+        </div>
+      </div>
+      <aside class="live-faces" aria-label="魔方六面实时视图">
+        <div class="section-heading"><h2>六面实时图</h2><span id="live-aligned">—</span></div>
+        <div class="face-views" id="face-views">
+          <canvas id="face-canvas" aria-label="U 上、R 右、F 前、D 下、L 左、B 后；与三维回放逐帧同步"></canvas>
+          <div class="face-labels" aria-hidden="true"><span>U <small>上</small></span><span>R <small>右</small></span><span>F <small>前</small></span><span>D <small>下</small></span><span>L <small>左</small></span><span>B <small>后</small></span></div>
+        </div>
+        <p class="live-note">随回放同步 · 固定魔方坐标</p>
+      </aside>
+      </div>
+      <div class="transport" inert>
+        <div class="time-row">
+          <span id="time">00:00.00</span>
+          <input id="timeline" type="range" min="0" max="0" value="0" step="1" aria-label="回放时间轴">
+          <span id="duration">00:00.00</span>
+        </div>
+        <div class="control-row">
+          <div class="play-controls">
+            <button id="restart" class="icon-button" title="回到开头" aria-label="回到开头">↤</button>
+            <button id="prev" class="icon-button" title="上一帧" aria-label="上一帧">‹</button>
+            <button id="play" class="primary" aria-pressed="false">播放</button>
+            <button id="next" class="icon-button" title="下一帧" aria-label="下一帧">›</button>
+          </div>
+          <div class="speed" role="group" aria-label="播放速度">
+            <button data-speed="0.25" aria-pressed="false">0.25×</button>
+            <button data-speed="0.5" aria-pressed="false">0.5×</button>
+            <button data-speed="1" class="active" aria-pressed="true">1×</button>
+            <button data-speed="2" aria-pressed="false">2×</button>
+            <button data-speed="4" aria-pressed="false">4×</button>
+          </div>
+          <span class="frame-label" id="frame-label">—</span>
+        </div>
+      </div>
+    </section>
+    <section class="sequence" aria-label="还原步骤">
+      <div class="section-heading"><h2>还原步骤</h2><span id="plan-status">正在加载</span></div>
+      <div id="moves" class="moves"></div>
+      <p class="scramble">初始打乱 <code id="scramble"></code></p>
+    </section>
+    <details id="details" class="details">
+      <summary><span>实验信息</span><span class="summary-hint">状态、对比与验证</span></summary>
+      <div class="details-body">
+        <section class="inspection" aria-label="当前物理状态">
+          <div class="cube-state">
+            <div class="section-heading"><h2>当前魔方状态</h2><span id="aligned">—</span></div>
+            <div id="cube-net" class="cube-net" aria-label="魔方六面展开图"></div>
+            <p class="net-note" id="net-note">颜色来自仿真姿态</p>
+          </div>
+          <div class="metrics">
+            <div><span>受力接触部件</span><strong id="contact-count">—</strong></div>
+            <div><span>法向接触力</span><strong id="force">—</strong></div>
+            <div><span>层对齐误差</span><strong id="angle">—</strong></div>
+            <div><span>离地高度</span><strong id="height">—</strong></div>
+            <div><span>状态验证</span><strong id="validation">—</strong></div>
+            <p id="failure"></p>
+          </div>
+        </section>
+        <section class="optimization" id="optimization" hidden aria-label="与优化前记录对比">
+          <h2>优化前后</h2>
+          <div class="optimization-metrics">
+            <div><span>原版用时</span><strong id="baseline-duration">—</strong></div>
+            <div><span>本版用时</span><strong id="optimized-duration">—</strong></div>
+            <div><span>用时缩短</span><strong id="time-reduction">—</strong></div>
+            <div><span id="handoff-label">双手互碰 · 50 Hz 采样</span><strong id="handoff-force">—</strong></div>
+          </div>
+          <p id="optimization-note"></p>
+        </section>
+        <section class="evidence" aria-label="模型与验证记录">
+          <h2>模型与验证</h2>
+          <p id="progress-note">正在读取验证记录。</p>
+          <dl>
+            <div><dt>灵巧手</dt><dd>xhand pro · 每手 21 自由度</dd></div>
+            <div><dt>机械臂</dt><dd>Marvin · 每臂 7 自由度</dd></div>
+            <div><dt>物理步长</dt><dd>1 ms</dd></div>
+            <div><dt>魔方驱动</dt><dd>机器人接触 · 无魔方执行器</dd></div>
+            <div><dt>独立复算</dt><dd id="audit-result">读取中</dd></div>
+          </dl>
+          <p class="scope">从预设双手握持姿态开始，使用固定打乱序列。本页面呈现仿真结果。</p>
+          <p class="hash" id="hash"></p>
+          <a class="reference" href="https://dex-rubik-cube.yanjieze.com/reproduce.html" target="_blank" rel="noreferrer">参考项目 <span aria-hidden="true">↗</span></a>
+        </section>
+      </div>
+    </details>
+  </main>
+  <footer><span>xhand pro · 仿真回放</span><span>拖动旋转 · 滚轮缩放 · 空格播放 · ← → 逐帧</span></footer>
+  <script src="assets/loader.b092eea290a3f204.js" defer></script>
+  <script src="assets/player.f1397884554e71d2.js" defer></script>
+</body>
+</html>

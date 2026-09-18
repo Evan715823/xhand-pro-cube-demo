@@ -1,0 +1,111 @@
+{
+  "schema": 1,
+  "source_html_sha256": "2ddb913362baaefb00de973ebee79737f0a5c95dfc9b09fe7c02ac217dbd68e8",
+  "recording_sha256": "561fbfdff55d799c8a76aaa5f4c03d950f53275001a4503db9ee087c51243d2e",
+  "recording_bytes": 84418176,
+  "part_count": 11,
+  "url": "https://evan715823.github.io/xhand-pro-cube-demo/",
+  "lossless_recording": true,
+  "files": {
+    ".gitattributes": {
+      "bytes": 26,
+      "sha256": "750dfd7d839a9b363ea5f2f51387ad52ddd3426ccbe0167e53d4c1fca1f1bc49"
+    },
+    ".nojekyll": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "LICENSE.md": {
+      "bytes": 709,
+      "sha256": "6b8c60008f8c49ff03be4de807d2e8863812802bb31003358bac838b8eca702c"
+    },
+    "README.md": {
+      "bytes": 1778,
+      "sha256": "4fc64bca46ef30eae6051e0ae41d698169cb31c80c77e8312427e7420891813e"
+    },
+    "THIRD_PARTY_NOTICES.md": {
+      "bytes": 1005,
+      "sha256": "ef7aa72efd175f9a032e1b27230565aa6acc4b13e9526c4beb046d7340e1fcdf"
+    },
+    "assets/favicon.svg": {
+      "bytes": 277,
+      "sha256": "f5431ad3586c9cc2fd55781e27ac6d5a6c182abdd07561193d419969241c5d9f"
+    },
+    "assets/loader.b092eea290a3f204.js": {
+      "bytes": 3509,
+      "sha256": "b092eea290a3f204411e8f13afd2dfcfafe552e519606ec5e13aae79852ee2ce"
+    },
+    "assets/player.f1397884554e71d2.js": {
+      "bytes": 2101000,
+      "sha256": "f1397884554e71d2d8e796daba3bcf4203b80f313f0843bdf7619b031f1d2c5e"
+    },
+    "assets/preview.png": {
+      "bytes": 207398,
+      "sha256": "304ffaee99628f04b044c191baae3532d93d515623dd19f02bb01c91b49f192c"
+    },
+    "assets/replay-00.26ad21e52a49450e.bin": {
+      "bytes": 8388608,
+      "sha256": "26ad21e52a49450e253b5781f770a5d869308acff46e0358c7c124f688386780"
+    },
+    "assets/replay-01.c3626c01755da57b.bin": {
+      "bytes": 8388608,
+      "sha256": "c3626c01755da57b764f01df4f8df6cfb8ae113b3546dd005e7425fb144a801f"
+    },
+    "assets/replay-02.ed0929f77114936e.bin": {
+      "bytes": 8388608,
+      "sha256": "ed0929f77114936e39f27e319d788976d148047a6a9dfbfa3092b3ed3a2c3973"
+    },
+    "assets/replay-03.567e65bd65d13dfe.bin": {
+      "bytes": 8388608,
+      "sha256": "567e65bd65d13dfe02dcb521629bfe7d0891a55ee8da5044821c79448f83cfc4"
+    },
+    "assets/replay-04.6f3eb0a2f5573e25.bin": {
+      "bytes": 8388608,
+      "sha256": "6f3eb0a2f5573e25495999257dea15f033bb88373e937fa76593ce030d5edccb"
+    },
+    "assets/replay-05.90ecfed020c0ddab.bin": {
+      "bytes": 8388608,
+      "sha256": "90ecfed020c0ddab19bfb2439639afc2f70a36be6748c0fb737866183e5feb38"
+    },
+    "assets/replay-06.cdd8154c59086398.bin": {
+      "bytes": 8388608,
+      "sha256": "cdd8154c59086398085a2b530441f11e840d8e91549690b5e3295c96f496c23d"
+    },
+    "assets/replay-07.b16e65fe740e889f.bin": {
+      "bytes": 8388608,
+      "sha256": "b16e65fe740e889f9fed3fb8856bbd24d780f39887da6922e099f4d36cfa5331"
+    },
+    "assets/replay-08.e33b78de5095dfa4.bin": {
+      "bytes": 8388608,
+      "sha256": "e33b78de5095dfa4199f1cbddd5a83c38fc1952a3313e83bc965415abdaae477"
+    },
+    "assets/replay-09.7503a6bdff72c101.bin": {
+      "bytes": 8388608,
+      "sha256": "7503a6bdff72c10187e0e362a3c7dae6f22ab10cf4089ef2a84bfa94af7d1dbf"
+    },
+    "assets/replay-10.56c3bca2e979d92c.bin": {
+      "bytes": 532096,
+      "sha256": "56c3bca2e979d92c9ee45a8892137b871b99e6e857329b8fa282446348e1462c"
+    },
+    "assets/replay-manifest.bdc1618437cf0765.json": {
+      "bytes": 2261,
+      "sha256": "bdc1618437cf07653d442bc35112e1abf4ef264390c423c9ef986a7b1b28e582"
+    },
+    "assets/style.b7e683a225934a40.css": {
+      "bytes": 12569,
+      "sha256": "b7e683a225934a405dddd857978372e504e98a6cf9c2376f04fa5dff876ec406"
+    },
+    "index.html": {
+      "bytes": 8458,
+      "sha256": "a7727430d73ac96333d59aa38e77380cf3d47a4ca6ac5bbc02b71f3923ff41fe"
+    },
+    "licenses/marvin.txt": {
+      "bytes": 1023,
+      "sha256": "e4da13b8ee8adf3c184f3cfaa765c1b002efd9e1b7a200fe7c507a30391f8fb9"
+    },
+    "licenses/robogym.txt": {
+      "bytes": 1063,
+      "sha256": "271d45b4b4594ff76b6209c12e7f8d183e8d51ea9ea67e63b97238d62f37335b"
+    }
+  }
+}
