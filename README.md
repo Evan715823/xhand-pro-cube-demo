@@ -16,7 +16,7 @@ The public site provides six synchronized orthographic cube views, 0.25×–4× 
 
 ## Hosting
 
-GitHub Pages publishes the `main` branch at the repository root. The entry page is small; approximately **84.4 MB** of compressed recording data loads with progress feedback. The original gzip bytes are split into 11 checksum-verified parts and reconstructed without resampling.
+GitHub Pages publishes the `main` branch at the repository root. The first view downloads approximately **10.4 MB**. The full recording is split into 56 independently verified segments, loaded as needed. Only three pose segments remain cached in memory. All original 50 Hz poses are preserved without resampling; an included gzip fallback supports browsers without DecompressionStream.
 
 This repository contains the public presentation assets. Full development code and numeric physics recordings remain in the separate research repository.
 
