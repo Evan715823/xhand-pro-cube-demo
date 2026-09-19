@@ -1,6 +1,6 @@
 /* Bounded replay streaming: exact recorded 50 Hz poses, three segments in memory. */
 (()=>{'use strict';
-const $=id=>document.getElementById(id),decoder=new TextDecoder();
+const $=id=>document.getElementById(id),decoder=new TextDecoder(),L={t:(...args)=>window.DEMO_I18N.t(...args),write:(...args)=>window.DEMO_I18N.write(...args)};
 const hex=buffer=>Array.from(new Uint8Array(buffer),b=>b.toString(16).padStart(2,'0')).join('');
 const digest=bytes=>crypto.subtle.digest('SHA-256',bytes).then(hex);
 const stats=window.REPLAY_DOWNLOAD={bytes:0,total:0,parts:0,retries:0,verified:false,mode:'streaming',cachedPoseBytes:0,maxCachedPoseBytes:0};
@@ -8,11 +8,11 @@ let manifestURL,manifest,starting=true;
 function progress(){
   if(!starting)return;
   $('load-progress').value=stats.total?Math.min(1,stats.bytes/stats.total):0;
-  $('load-detail').textContent=`${(stats.bytes/1e6).toFixed(1)} / ${(stats.total/1e6).toFixed(1)} MB`;
+  L.write($('load-detail'),()=>`${(stats.bytes/1e6).toFixed(1)} / ${(stats.total/1e6).toFixed(1)} MB`);
 }
 window.showReplayError=error=>{
-  $('load-title').textContent='回放加载失败';
-  $('load-detail').textContent=/WebGL|context/i.test(String(error))?'当前浏览器无法启用三维显示，请用 Safari 打开。':'网络中断或浏览器不兼容，请重试或用 Safari 打开。';
+  L.write($('load-title'),()=>L.t('回放加载失败'));
+  L.write($('load-detail'),()=>/WebGL|context/i.test(String(error))?L.t('当前浏览器无法启用三维显示，请用 Safari 打开。'):L.t('网络中断或浏览器不兼容，请重试或用 Safari 打开。'));
   $('load-retry').hidden=false;$('load-retry').onclick=()=>location.reload();
 };
 async function fetchBytes(url,expected){
@@ -83,7 +83,7 @@ window.loadReplayData=async()=>{
     state:()=>({segments:cache.size,cachedPoseBytes:stats.cachedPoseBytes,maxCachedPoseBytes:stats.maxCachedPoseBytes,frameCount:manifest.frame_count,segmentFrames:manifest.segment_frames})
   };
   await ensure(0);stats.verified=true;stats.startupBytes=stats.bytes;starting=false;
-  $('load-title').textContent='正在准备三维回放';$('load-detail').textContent='首段已就绪';
+  L.write($('load-title'),()=>L.t('正在准备三维回放'));L.write($('load-detail'),()=>L.t('首段已就绪'));
   await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));
   return meta;
 };

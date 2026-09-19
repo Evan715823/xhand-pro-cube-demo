@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "source_html_sha256": "03b4d60a6423d23fc83458e5989ad17be94f842f5bd9bd369b9784e04b10d101",
+  "source_html_sha256": "e8bee7eb9d472eb983a9967a9f3b052fd8a020a9e3ed0c9a6c82f797bac6beb8",
   "recording_sha256": "561fbfdff55d799c8a76aaa5f4c03d950f53275001a4503db9ee087c51243d2e",
   "recording_bytes": 84418176,
   "part_count": 56,
@@ -23,8 +23,8 @@
       "sha256": "6b8c60008f8c49ff03be4de807d2e8863812802bb31003358bac838b8eca702c"
     },
     "README.md": {
-      "bytes": 1885,
-      "sha256": "fa865d091a91246b1a355a81aaff10e23b19099a7c5fa0e755ec50656f5bb45b"
+      "bytes": 1969,
+      "sha256": "9b891fafae0b961ebf293bfcbda52278b527d82681ee482a9425eaf560cf27bb"
     },
     "THIRD_PARTY_NOTICES.md": {
       "bytes": 1144,
@@ -38,13 +38,13 @@
       "bytes": 33093,
       "sha256": "fe088b3985e466a646fd83238423f5945374a34eba8ae8b105ec44615bbe3091"
     },
-    "assets/loader.74a9279be9f9cc13.js": {
-      "bytes": 6622,
-      "sha256": "74a9279be9f9cc13298791d8929d831fa2f5d8e63379c4bd687db91a604c81c3"
+    "assets/loader.e5db69258ed1415f.js": {
+      "bytes": 6746,
+      "sha256": "e5db69258ed1415f3291590a660ca4c09a5c0936fbcadb5b01083494df96c1b6"
     },
-    "assets/player.84d2d4723b20dd83.js": {
-      "bytes": 2102001,
-      "sha256": "84d2d4723b20dd8383ecd8e005292b5e337e53712c923eb142c14e881e15642c"
+    "assets/player.8b14a064fc36f48d.js": {
+      "bytes": 2117295,
+      "sha256": "8b14a064fc36f48d987ce05dc19e10ecbb9644b216ede944a1f3d54cb045bfcb"
     },
     "assets/preview.png": {
       "bytes": 207398,
@@ -282,13 +282,13 @@
       "bytes": 234669,
       "sha256": "f6c1269d30174f5f8c3a565e4ed3aa3e3a281e9c8b8e7371c17ef2d61c4b3b7d"
     },
-    "assets/style.95b899b98bfb4d0a.css": {
-      "bytes": 12758,
-      "sha256": "95b899b98bfb4d0a882bc66b66f7c5b9c15f0b4b9081260b21c22401a5d1529c"
+    "assets/style.1101cffad7b8ebf7.css": {
+      "bytes": 13571,
+      "sha256": "1101cffad7b8ebf7b8cfacee16cdacc95648560e770e36e096bd1ded800824cd"
     },
     "index.html": {
-      "bytes": 8409,
-      "sha256": "fb0a17d71c28e393c49500618ed7b9c2684fb56ec54b9b66a33b68f6a8561563"
+      "bytes": 8570,
+      "sha256": "71c0da69fdca690478a86afd8d51dbc8961e5a3c8ea4fb756bbc4784c8987332"
     },
     "licenses/fflate.txt": {
       "bytes": 1069,

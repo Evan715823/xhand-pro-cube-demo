@@ -1,3 +1,228 @@
+
+// Translate presentation text only; recorded poses and playback state are untouched.
+(()=>{'use strict';
+const dictionary={
+  "下载视频 ↓": "Download video ↓",
+  "xhand pro · 双臂解魔方": "xhand pro · Dual-arm cube solving",
+  "页面导航": "Page navigation",
+  "实验信息": "Experiment details",
+  "下载报告": "Download report",
+  "双臂解魔方": "Dual-arm cube solving",
+  "MuJoCo 仿真回放": "Recorded MuJoCo simulation",
+  "正在加载": "Loading",
+  "查看还原结果": "View result",
+  "实验结果": "Results",
+  "仿真用时": "Simulation time",
+  "完成步骤": "Completed moves",
+  "末态对齐误差": "Final alignment error",
+  "三维回放": "3D replay",
+  "拖动可旋转的三维仿真回放": "Drag to rotate the recorded 3D simulation",
+  "正在加载模型与回放…": "Loading model and recording…",
+  "视角": "Camera view",
+  "特写": "Close-up",
+  "全景": "Wide",
+  "俯视": "Top",
+  "跟随魔方": "Follow cube",
+  "接触点": "Contacts",
+  "魔方六面实时视图": "Six live cube views",
+  "六面实时图": "Six live faces",
+  "U 上、R 右、F 前、D 下、L 左、B 后；与三维回放逐帧同步": "U up, R right, F front, D down, L left, B back; synchronized with the replay",
+  "上": "Up",
+  "右": "Right",
+  "前": "Front",
+  "下": "Down",
+  "左": "Left",
+  "后": "Back",
+  "随回放同步 · 固定魔方坐标": "Synchronized · Cube reference frame",
+  "回放时间轴": "Replay timeline",
+  "回到开头": "Back to start",
+  "上一帧": "Previous frame",
+  "播放": "Play",
+  "下一帧": "Next frame",
+  "播放速度": "Playback speed",
+  "还原步骤": "Solution moves",
+  "初始打乱": "Initial scramble",
+  "状态、对比与验证": "State, comparison and validation",
+  "当前物理状态": "Current physical state",
+  "当前魔方状态": "Current cube state",
+  "魔方六面展开图": "Unfolded cube faces",
+  "颜色来自仿真姿态": "Colors from recorded poses",
+  "受力接触部件": "Bodies in contact",
+  "法向接触力": "Normal contact force",
+  "层对齐误差": "Layer alignment error",
+  "离地高度": "Height above ground",
+  "状态验证": "Validation",
+  "与优化前记录对比": "Comparison with the baseline",
+  "优化前后": "Before and after",
+  "原版用时": "Baseline time",
+  "本版用时": "Current time",
+  "用时缩短": "Time reduction",
+  "双手互碰 · 50 Hz 采样": "Hand-to-hand contact · 50 Hz",
+  "模型与验证记录": "Model and validation records",
+  "模型与验证": "Model and validation",
+  "正在读取验证记录。": "Loading validation records.",
+  "灵巧手": "Dexterous hands",
+  "xhand pro · 每手 21 自由度": "xhand pro · 21 DOF per hand",
+  "机械臂": "Robot arms",
+  "Marvin · 每臂 7 自由度": "Marvin · 7 DOF per arm",
+  "物理步长": "Physics timestep",
+  "魔方驱动": "Cube actuation",
+  "机器人接触 · 无魔方执行器": "Robot contact · No cube actuators",
+  "独立复算": "Independent replay audit",
+  "读取中": "Loading",
+  "从预设双手握持姿态开始，使用固定打乱序列。本页面呈现仿真结果。": "Starts from a preset two-handed grasp and one fixed scramble. This page presents simulation results.",
+  "xhand pro · 仿真回放": "xhand pro · Simulation replay",
+  "拖动旋转 · 滚轮缩放 · 空格播放 · ← → 逐帧": "Drag to orbit · Scroll to zoom · Space to play · ← → to step",
+  " 帧": " frames",
+  " 步 ": " · ",
+  " 步解法": " moves",
+  " 步解法。完整还原尚未完成。": " moves. The full solve is not complete.",
+  " 步；": " · ",
+  "xhand pro × Marvin；本记录已完成 ": "xhand pro × Marvin; completed ",
+  "xhand pro 与 Marvin 双臂完成十步还原，并在末态稳定保持至少两秒。": "xhand pro and two Marvin arms complete all ten moves and hold the solved state for at least two seconds.",
+  "上方为真实仿真用时；双手互碰时长按相同的 50 Hz 姿态与原生网格复查。": "Times above are recorded simulation times. Hand-to-hand contact duration is rechecked using the same 50 Hz poses and original meshes.",
+  "十步还原与末态保持验证通过。": "All ten moves and the final hold passed validation.",
+  "回放加载失败：": "Replay failed to load: ",
+  "壳体边缘等非传感器表面的累计接触冲量有所增加，完整指标保留在测试报告中。": "Accumulated contact impulse on non-sensor surfaces, including shell edges, increased. Full metrics are retained in the report.",
+  "实验已停止": "Experiment stopped",
+  "尚未完成物理验收": "Physical validation pending",
+  "尚未完成独立复算": "Independent audit pending",
+  "层未对齐，暂不显示六面颜色": "Layers are moving; the unfolded colors are temporarily hidden.",
+  "已完成 ": "Completed ",
+  "已完整还原": "Fully solved",
+  "已对齐": "Aligned",
+  "已通过本段接触操作测试；完整十步还原尚未完成。": "This contact operation passed; the full ten-move solve is not complete.",
+  "已通过物理状态验收": "Physical state verified",
+  "换握接触峰值": "Peak contact force during regrasp",
+  "暂停": "Pause",
+  "未对齐": "Unaligned",
+  "未通过": "Failed",
+  "本段操作已完成": "Operation completed",
+  "计划第 ": "Planned move ",
+  "跳到第 ": "Jump to move ",
+  "轨迹 SHA-256 / ": "Trajectory SHA-256 / ",
+  "转层中": "Turning",
+  "退手前检查路径间隙，减少重复换握，并保留转层后的对齐检查。": "Clearance is checked before withdrawal, redundant regrasps are reduced, and alignment is checked after each turn. ",
+  "逐毫秒复算通过": "Audit passed at every 1 ms step",
+  "通过": "Passed",
+  "重播": "Replay",
+  "颜色来自当前仿真姿态": "Colors from the current recorded pose",
+  "第九步由 {before} 秒缩短到 {after} 秒。": "Move nine was reduced from {before} s to {after} s. ",
+  "正在加载所选片段…": "Loading selected segment…",
+  "片段加载失败 · 点此重试": "Segment failed to load · Retry",
+  "回放加载失败": "Replay failed to load",
+  "当前浏览器无法启用三维显示，请用 Safari 打开。": "3D rendering is unavailable. Try Safari or another WebGL-capable browser.",
+  "网络中断或浏览器不兼容，请重试或用 Safari 打开。": "Network or browser error. Retry or open in a compatible browser.",
+  "正在准备三维回放": "Preparing 3D replay",
+  "首段已就绪": "First segment ready",
+  "正在加载回放": "Loading replay",
+  "回放下载进度": "Replay download progress",
+  "正在连接": "Connecting",
+  "重新加载": "Reload",
+  "请启用 JavaScript 以查看三维回放。": "Enable JavaScript to view the 3D replay.",
+  "Y 翻面 · 前 45°": "Y reorientation · First 45°",
+  "Y 翻面 · 后 45°并返回工作区": "Y reorientation · Final 45° and return",
+  "left 手平移换握": "Left hand · Translate to regrasp",
+  "right 手平移换握": "Right hand · Translate to regrasp",
+  "初始双手握持": "Initial two-handed grasp",
+  "双手同步恢复基准工作区": "Both hands return to the working pose",
+  "右手松开": "Right hand releases",
+  "右手绕行换握": "Right hand repositions for regrasp",
+  "右手进入新的转层位置": "Right hand moves to the next turning pose",
+  "右手退让": "Right hand withdraws",
+  "右手重新夹持": "Right hand regrips",
+  "右手重新承载已对齐的操作层": "Right hand supports the aligned layer",
+  "左手平移到新支撑层": "Left hand moves to the next support layer",
+  "左手承载进入转层工作区": "Left hand carries the cube to the turning area",
+  "左手松开": "Left hand releases",
+  "左手移到中层棱块": "Left hand moves to the middle-layer edges",
+  "左手绕行换握": "Left hand repositions for regrasp",
+  "左手退让": "Left hand withdraws",
+  "左手重新夹持": "Left hand regrips",
+  "支撑手带回操作区域": "Support hand returns the cube to the working area",
+  "支撑手恢复基准工作姿态": "Support hand returns to the reference pose",
+  "自由手小幅退让以恢复间隙": "Free hand retreats slightly to restore clearance",
+  "xhand pro · 两圈转笔": "xhand pro · Two-turn pen spinning",
+  "灵巧手两圈转笔": "Two-turn pen spinning",
+  "Isaac Lab 仿真回放": "Recorded Isaac Lab simulation",
+  "两圈实验 · 成功样例": "Two-turn experiment · Selected success",
+  "查看最终姿态": "View final pose",
+  "展示回合净旋转": "Net rotation in this episode",
+  "独立评估成功回合": "Successful evaluation episodes",
+  "当前圈数": "Current turns",
+  "三维": "3D",
+  "视频": "Video",
+  "斜视": "Perspective",
+  "侧视": "Side",
+  "拖动旋转 · 滚轮缩放": "Drag to orbit · Scroll to zoom",
+  "旋转": "Spinning",
+  "保持": "Holding",
+  "PPO 旋转": "PPO rotation",
+  "准备调整抓握": "Preparing grip adjustment",
+  "手指调整抓握": "Finger grip adjustment",
+  "继续旋转": "Resuming rotation",
+  "保持抓握": "Holding the pen",
+  "圈": "turns",
+  "回放速度": "Playback speed",
+  "从头播放": "Play from start",
+  "下载视频": "Download video",
+  "回放方式": "Replay mode",
+  "两圈转笔三维回放": "3D replay of two-turn pen spinning",
+  "可拖动旋转视角的原始仿真记录": "Recorded simulation; drag to rotate the camera",
+  "加载模型与轨迹…": "Loading model and trajectory…",
+  "控制阶段": "Control phases",
+  "原始记录 · 30 Hz": "Recorded states · 30 Hz",
+  "实验性控制器": "Experimental controller",
+  "控制方式": "Controller",
+  "PPO 旋转 + 固定手指调整 + 停止保持": "PPO rotation + fixed finger adjustment + stop-and-hold",
+  "展示来源": "Recording source",
+  "独立评估中的一个成功回合，环境 856 / 1024。视频由同一段仿真轨迹重新渲染。": "One selected successful episode from independent evaluation, environment 856 / 1024. The video is rendered from the same recorded trajectory.",
+  "整体成功率": "Overall success rate",
+  "4 / 4335 回合成功（0.0923%）。当前版本仍不稳定。": "4 / 4335 episodes succeeded (0.0923%). This version remains unstable.",
+  "仿真配置": "Simulation setup",
+  "原始 XHand1 Pro 21 自由度右手；笔长 160 mm、直径 14 mm、质量 15 g；满重力。": "Original 21-DOF XHand1 Pro right hand; 160 mm pen, 14 mm diameter, 15 g mass; full gravity.",
+  "停止规则": "Stop rule",
+  "达到 2.05 圈后停止增加关节目标，保持当时的抓握。": "At 2.05 turns, joint target increments stop and the current grasp is held.",
+  "范围": "Scope",
+  "从一个固定抓握初态加关节扰动开始。浏览器仅回放记录，不运行物理仿真。": "Starts from one fixed grasp with joint noise. The browser replays recorded states; it does not run physics.",
+  "展示为独立评估中选出的成功样例，整体成功率见实验信息。": "A selected successful episode from independent evaluation. See experiment details for the overall success rate.",
+  "净旋转 {turns} 圈": "Net rotation: {turns} turns",
+  "回放加载失败，请刷新页面或切换到视频。": "Replay failed to load. Reload the page or switch to video.",
+  "状态、控制与验证": "State, controller and validation",
+  "灵巧手转笔": "Pen spinning",
+  "双臂魔方": "Cube solving",
+  "整块翻面 → B": "Reorient cube → B",
+  "整块翻面 → F": "Reorient cube → F",
+  "整块翻面 → L": "Reorient cube → L",
+  "整块翻面 → U": "Reorient cube → U",
+  "第 5 步完成 · 保持": "Move 5 complete · Hold",
+  "第 6 步完成 · 保持": "Move 6 complete · Hold",
+  "第 7 步完成 · 保持": "Move 7 complete · Hold",
+  "第 8 步完成 · 保持": "Move 8 complete · Hold",
+  "第 9 步完成 · 保持": "Move 9 complete · Hold",
+  "第 10 步完成 · 保持": "Move 10 complete · Hold",
+  "转层 B'": "Turn B'",
+  "转层 D": "Turn D",
+  "转层 D'": "Turn D'",
+  "转层 F": "Turn F",
+  "转层 F'": "Turn F'",
+  "转层 L": "Turn L",
+  "转层 R": "Turn R",
+  "转层 R'": "Turn R'",
+  "转层 U": "Turn U",
+  "转层 U'": "Turn U'"
+};
+let language='zh';try{language=new URLSearchParams(location.search).get('lang')||localStorage.getItem('xhand-demo-language')||'zh'}catch(_){}if(!['zh','en'].includes(language))language='zh';
+const nodes=[],attributes=[],bindings=new Map(),attributeBindings=new Map();
+function t(source,parameters={}){let value=language==='en'?(dictionary[source]??source):source;for(const [key,item]of Object.entries(parameters))value=value.replaceAll('{'+key+'}',String(item));return value}
+function write(element,render){bindings.set(element,render);element.textContent=render()}
+function attr(element,name,render){if(!attributeBindings.has(element))attributeBindings.set(element,new Map());attributeBindings.get(element).set(name,render);element.setAttribute(name,render())}
+function bind(root=document){const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);while(walker.nextNode()){const node=walker.currentNode;if(node.parentElement?.closest('script,style,#language-toggle'))continue;const source=node.nodeValue;if(/[\u3400-\u9fff]/.test(source)){nodes.push([node,source]);node.nodeValue=source.replace(/\S[\s\S]*\S|\S/,text=>t(text))}}for(const element of root.querySelectorAll('[aria-label],[title]')){if(element.id==='language-toggle')continue;for(const name of ['aria-label','title']){const source=element.getAttribute(name);if(source&&/[\u3400-\u9fff]/.test(source)){attributes.push([element,name,source]);element.setAttribute(name,t(source))}}}}
+function setLanguage(next){if(!['zh','en'].includes(next))return;language=next;try{localStorage.setItem('xhand-demo-language',next)}catch(_){}document.documentElement.lang=next==='zh'?'zh-CN':'en';for(const [node,source]of nodes)if(node.isConnected)node.nodeValue=source.replace(/\S[\s\S]*\S|\S/,text=>t(text));for(const [element,name,source]of attributes)if(element.isConnected)element.setAttribute(name,t(source));for(const [element,render]of bindings)if(element.isConnected)element.textContent=render();for(const [element,entries]of attributeBindings)if(element.isConnected)for(const [name,render]of entries)element.setAttribute(name,render());const button=document.getElementById('language-toggle');if(button){button.textContent=next==='zh'?'EN':'中文';button.setAttribute('aria-label',next==='zh'?'Switch to English':'切换为中文');button.title=next==='zh'?'Switch to English':'切换为中文'}window.dispatchEvent(new CustomEvent('demo-language-change',{detail:{language:next}}))}
+window.DEMO_I18N={t,phase:source=>t(source),write,attr,bind,setLanguage,get language(){return language}};
+bind();const button=document.getElementById('language-toggle');if(button)button.addEventListener('click',()=>setLanguage(language==='zh'?'en':'zh'));setLanguage(language);
+})();
+
 /*
 The MIT License
 
@@ -81190,7 +81415,7 @@ THREE.OrbitControls = OrbitControls;
 })();
 /* Offline replay of recorded MuJoCo poses. No procedural hand or cube motion. */
 (()=>{'use strict';
-const $=id=>document.getElementById(id),T=window.THREE;
+const $=id=>document.getElementById(id),T=window.THREE,L=window.DEMO_I18N;
 let data,poses,bodies,scene,camera,renderer,orbit,contactGroup,frame=0,position=0,playing=false,speed=1,lastTime=0,dirty=true,currentView='close',follow=true;
 let faceRenderer,faceScene,faceBodies,faceCameras,cubeRootIndex;
 const faceNormals=[[0,0,1],[1,0,0],[0,-1,0],[0,0,-1],[-1,0,0],[0,1,0]];
@@ -81202,10 +81427,10 @@ getFaceState:()=>({frame,facelets:data?.frames[frame]?.facelets,views:faceCamera
 getBodyPose:i=>bodies?.[i]?[...bodies[i].position.toArray(),bodies[i].quaternion.w,...bodies[i].quaternion.toArray().slice(0,3)]:null};
 function unpack(a){const s=atob(a.base64),b=new Uint8Array(s.length);for(let i=0;i<s.length;i++)b[i]=s.charCodeAt(i);if(a.encoding==='xor-frame-byteplanes'){const raw=new Uint8Array(b.length),n=b.length/4;for(let lane=0;lane<4;lane++)for(let i=0;i<n;i++)raw[i*4+lane]=b[lane*n+i];const words=new Uint32Array(raw.buffer);for(let i=a.frame_width;i<n;i++)words[i]^=words[i-a.frame_width];return new Float32Array(raw.buffer)}return a.dtype==='<u4'?new Uint32Array(b.buffer):new Float32Array(b.buffer)}
 function clock(t){return String(Math.floor(t/60)).padStart(2,'0')+':'+(t%60).toFixed(2).padStart(5,'0')}
-function pause(){playing=false;$('play').textContent=frame===data?.frames.length-1?'重播':'播放';$('play').setAttribute('aria-pressed','false')}
-function play(){if(!api.ready)return;if(frame>=data.frames.length-1)setFrame(0);playing=true;lastTime=performance.now();$('play').textContent='暂停';$('play').setAttribute('aria-pressed','true')}
-function net(state){document.querySelectorAll('.cube-face').forEach((face,i)=>{[...face.querySelectorAll('span')].forEach((tile,j)=>{tile.style.background=state?palette[state[i*9+j]]:'#d2d2d7'})});$('net-note').textContent=state?'颜色来自当前仿真姿态':'层未对齐，暂不显示六面颜色';$('aligned').textContent=state?'已对齐':'未对齐';$('live-aligned').textContent=state?'已对齐':'转层中'}
-function applyFrame(n){if(!data||!bodies)return;frame=Math.max(0,Math.min(data.frames.length-1,Math.round(n)));position=frame;const segment=window.REPLAY_STREAM.segment(frame);poses=segment.poses;const f=segment.frames[frame-segment.start];if(follow&&currentView!=='wide'&&camera&&orbit){const shift=new T.Vector3(...f.cube_position).sub(orbit.target);camera.position.add(shift);orbit.target.add(shift)}document.querySelectorAll('#moves button').forEach(b=>b.classList.toggle('active',+b.dataset.step===f.move_index));bodies.forEach((b,i)=>{const j=(window.REPLAY_STREAM.localIndex(frame)*bodies.length+i)*7;b.position.fromArray(poses,j);b.quaternion.set(poses[j+4],poses[j+5],poses[j+6],poses[j+3])});$('timeline').value=frame;$('time').textContent=clock(f.t);$('phase').textContent=f.phase;$('contact-count').textContent=f.contact_bodies.length;$('force').textContent=f.force_N.toFixed(2)+' N';$('angle').textContent=f.angle_error_deg.toFixed(2)+'°';$('height').textContent=((f.cube_position[2]+(data.report.mode==='marvin_xhand'?.64:0))*1000).toFixed(1)+' mm';$('frame-label').textContent=String(frame+1)+' / '+data.frames.length+' 帧';net(f.facelets);if(!playing)$('play').textContent=frame===data.frames.length-1?'重播':'播放';
+function pause(){playing=false;L.write($('play'),()=>frame===data?.frames.length-1?L.t('重播'):L.t('播放'));$('play').setAttribute('aria-pressed','false')}
+function play(){if(!api.ready)return;if(frame>=data.frames.length-1)setFrame(0);playing=true;lastTime=performance.now();L.write($('play'),()=>L.t('暂停'));$('play').setAttribute('aria-pressed','true')}
+function net(state){document.querySelectorAll('.cube-face').forEach((face,i)=>{[...face.querySelectorAll('span')].forEach((tile,j)=>{tile.style.background=state?palette[state[i*9+j]]:'#d2d2d7'})});L.write($('net-note'),()=>state?L.t('颜色来自当前仿真姿态'):L.t('层未对齐，暂不显示六面颜色'));L.write($('aligned'),()=>state?L.t('已对齐'):L.t('未对齐'));L.write($('live-aligned'),()=>state?L.t('已对齐'):L.t('转层中'))}
+function applyFrame(n){if(!data||!bodies)return;frame=Math.max(0,Math.min(data.frames.length-1,Math.round(n)));position=frame;const segment=window.REPLAY_STREAM.segment(frame);poses=segment.poses;const f=segment.frames[frame-segment.start];if(follow&&currentView!=='wide'&&camera&&orbit){const shift=new T.Vector3(...f.cube_position).sub(orbit.target);camera.position.add(shift);orbit.target.add(shift)}document.querySelectorAll('#moves button').forEach(b=>b.classList.toggle('active',+b.dataset.step===f.move_index));bodies.forEach((b,i)=>{const j=(window.REPLAY_STREAM.localIndex(frame)*bodies.length+i)*7;b.position.fromArray(poses,j);b.quaternion.set(poses[j+4],poses[j+5],poses[j+6],poses[j+3])});$('timeline').value=frame;L.write($('time'),()=>clock(f.t));L.write($('phase'),()=>L.phase(f.phase));L.write($('contact-count'),()=>f.contact_bodies.length);L.write($('force'),()=>f.force_N.toFixed(2)+' N');L.write($('angle'),()=>f.angle_error_deg.toFixed(2)+'°');L.write($('height'),()=>((f.cube_position[2]+(data.report.mode==='marvin_xhand'?.64:0))*1000).toFixed(1)+' mm');L.write($('frame-label'),()=>String(frame+1)+' / '+data.frames.length+L.t(' 帧'));net(f.facelets);if(!playing)L.write($('play'),()=>frame===data.frames.length-1?L.t('重播'):L.t('播放'));
 contactGroup.children.forEach((p,i)=>{const c=f.contacts[i];p.visible=!!c&&c[3]>.05;if(c){p.position.fromArray(c);p.scale.setScalar(Math.min(2,Math.max(.5,c[3])))}});dirty=true;}
 function setView(view){if(!camera)return;currentView=view;orbit.target.fromArray(data.frames[view==='wide'?0:frame].cube_position);if(view==='wide'&&data.report.mode==='marvin_xhand')orbit.target.add(new T.Vector3(-.22,0,-.08));const offset=view==='top'?[.001,0,.48]:view==='wide'?(data.report.mode==='marvin_xhand'?[1.05,-1.05,.65]:[.55,-.55,.36]):[0,.3,.3];camera.position.copy(orbit.target).add(new T.Vector3(...offset));orbit.update();document.querySelectorAll('[data-view]').forEach(b=>{const active=b.dataset.view===view;b.classList.toggle('active',active);b.setAttribute('aria-pressed',String(active))});dirty=true;}
 function resize(){if(!renderer)return;const r=$('viewport').getBoundingClientRect();renderer.setSize(r.width,r.height,false);camera.aspect=r.width/r.height;camera.updateProjectionMatrix();if(faceRenderer){const f=$('face-views').getBoundingClientRect();faceRenderer.setSize(f.width,f.height,false)}dirty=true;}
@@ -81235,10 +81460,10 @@ function setFrame(n){
   const apply=()=>{buffering=false;$('segment-status').hidden=true;applyFrame(n);stream.prefetch(n)};
   if(stream.has(n)){apply();return}
   buffering=true;
-  const status=$('segment-status');status.hidden=false;status.textContent='正在加载所选片段…';status.onclick=null;
+  const status=$('segment-status');status.hidden=false;L.write(status,()=>L.t('正在加载所选片段…'));status.onclick=null;
   return stream.ensure(n).then(segment=>{if(generation===seekGeneration&&segment)apply()}).catch(error=>{
     if(generation!==seekGeneration)return;
-    buffering=false;pause();status.textContent='片段加载失败 · 点此重试';status.onclick=()=>setFrame(n);console.warn(error);
+    buffering=false;pause();L.write(status,()=>L.t('片段加载失败 · 点此重试'));status.onclick=()=>setFrame(n);console.warn(error);
   });
 }
 
@@ -81254,15 +81479,15 @@ initFaces();
 delete data.geometries;
 const grid=new T.GridHelper(2,40,'#d4d4d9','#e2e2e7');grid.rotation.x=Math.PI/2;grid.position.z=data.report.mode==='marvin_xhand'?-.635:.001;[].concat(grid.material).forEach(m=>{m.transparent=true;m.opacity=.4});scene.add(grid);
 contactGroup=new T.Group();scene.add(contactGroup);const dot=new T.SphereGeometry(.0012,8,6),mat=new T.MeshBasicMaterial({color:'#ff41ad',depthTest:false});for(let i=0;i<data.max_contacts;i++)contactGroup.add(new T.Mesh(dot,mat));contactGroup.visible=false;
-const locations=[[1,0],[2,1],[1,1],[1,2],[0,1],[3,1]];'URFDLB'.split('').forEach((f,i)=>{const face=document.createElement('div');face.className='cube-face';face.style.gridColumn=locations[i][0]+1;face.style.gridRow=locations[i][1]+1;for(let j=0;j<9;j++)face.append(document.createElement('span'));const label=document.createElement('i');label.textContent=f;face.append(label);$('cube-net').append(face)});
-$('timeline').max=data.frames.length-1;$('duration').textContent=clock(data.frames.at(-1).t);$('run-status').textContent=data.report.full_solve?'已完整还原':data.report.passed?'本段操作已完成':'实验已停止';$('validation').textContent=data.report.passed?'通过':'未通过';$('failure').textContent=data.report.failure||(data.report.full_solve?'十步还原与末态保持验证通过。':'已通过本段接触操作测试；完整十步还原尚未完成。');$('scramble').textContent=data.solution.scramble;
-$('summary-duration').textContent=clock(data.frames.at(-1).t);$('summary-steps').textContent=(data.report.completed_moves||0)+' / '+data.solution.steps.length;$('summary-angle').textContent=data.frames.at(-1).angle_error_deg.toFixed(2)+'°';$('open-details').onclick=()=>{$('details').open=true};if(!data.report.passed)$('details').open=true;
-const completed=data.report.completed_moves||0;$('plan-status').textContent='已完成 '+completed+' / '+data.solution.steps.length+' 步解法';$('audit-result').textContent=data.audit?.integrity_passed?'逐毫秒复算通过': '尚未完成独立复算';
-document.body.dataset.result=data.report.full_solve?'solved':data.report.passed?'partial':'failed';if(!data.report.full_solve)$('progress-note').textContent='xhand pro × Marvin；本记录已完成 '+completed+' / '+data.solution.steps.length+' 步解法。完整还原尚未完成。';if(data.report.full_solve)$('progress-note').textContent='xhand pro 与 Marvin 双臂完成十步还原，并在末态稳定保持至少两秒。';
+const locations=[[1,0],[2,1],[1,1],[1,2],[0,1],[3,1]];'URFDLB'.split('').forEach((f,i)=>{const face=document.createElement('div');face.className='cube-face';face.style.gridColumn=locations[i][0]+1;face.style.gridRow=locations[i][1]+1;for(let j=0;j<9;j++)face.append(document.createElement('span'));const label=document.createElement('i');L.write(label,()=>f);face.append(label);$('cube-net').append(face)});
+$('timeline').max=data.frames.length-1;L.write($('duration'),()=>clock(data.frames.at(-1).t));L.write($('run-status'),()=>data.report.full_solve?L.t('已完整还原'):data.report.passed?L.t('本段操作已完成'):L.t('实验已停止'));L.write($('validation'),()=>data.report.passed?L.t('通过'):L.t('未通过'));L.write($('failure'),()=>data.report.failure||(data.report.full_solve?L.t('十步还原与末态保持验证通过。'):L.t('已通过本段接触操作测试；完整十步还原尚未完成。')));L.write($('scramble'),()=>data.solution.scramble);
+L.write($('summary-duration'),()=>clock(data.frames.at(-1).t));L.write($('summary-steps'),()=>(data.report.completed_moves||0)+' / '+data.solution.steps.length);L.write($('summary-angle'),()=>data.frames.at(-1).angle_error_deg.toFixed(2)+'°');$('open-details').onclick=()=>{$('details').open=true};if(!data.report.passed)$('details').open=true;
+const completed=data.report.completed_moves||0;L.write($('plan-status'),()=>L.t('已完成 ')+completed+' / '+data.solution.steps.length+L.t(' 步解法'));L.write($('audit-result'),()=>data.audit?.integrity_passed?L.t('逐毫秒复算通过'): L.t('尚未完成独立复算'));
+document.body.dataset.result=data.report.full_solve?'solved':data.report.passed?'partial':'failed';if(!data.report.full_solve)L.write($('progress-note'),()=>L.t('xhand pro × Marvin；本记录已完成 ')+completed+' / '+data.solution.steps.length+L.t(' 步解法。完整还原尚未完成。'));if(data.report.full_solve)L.write($('progress-note'),()=>L.t('xhand pro 与 Marvin 双臂完成十步还原，并在末态稳定保持至少两秒。'));
 const comparison=data.report.optimization?.comparison;
-if(comparison&&data.report.full_solve){$('optimization').hidden=false;$('baseline-duration').textContent=clock(comparison.baseline_seconds);$('optimized-duration').textContent=clock(data.report.seconds);$('time-reduction').textContent=comparison.time_reduction_percent.toFixed(1)+'%';if(Number.isFinite(comparison.baseline_interarm_seconds)&&Number.isFinite(comparison.optimized_interarm_seconds)){$('handoff-force').textContent=comparison.baseline_interarm_seconds.toFixed(2)+' → '+comparison.optimized_interarm_seconds.toFixed(2)+' s'}else{$('handoff-label').textContent='换握接触峰值';$('handoff-force').textContent=comparison.baseline_handoff_peak_N.toFixed(2)+' → '+comparison.optimized_handoff_peak_N.toFixed(2)+' N'};$('optimization-note').textContent='退手前检查路径间隙，减少重复换握，并保留转层后的对齐检查。'+(Number.isFinite(comparison.optimized_ninth_step_seconds)?`第九步由 ${comparison.baseline_ninth_step_seconds.toFixed(2)} 秒缩短到 ${comparison.optimized_ninth_step_seconds.toFixed(2)} 秒。`:'')+'上方为真实仿真用时；双手互碰时长按相同的 50 Hz 姿态与原生网格复查。'+(comparison.optimized_nonpad_impulse_Ns>comparison.baseline_nonpad_impulse_Ns?'壳体边缘等非传感器表面的累计接触冲量有所增加，完整指标保留在测试报告中。':'');}
-for(const step of data.solution.steps){const e=document.createElement('button');e.textContent=step.move;e.dataset.step=step.index;const start=data.frames.findIndex(f=>f.move_index===step.index);e.disabled=start<0;e.onclick=()=>{pause();setFrame(start)};e.setAttribute('aria-label','跳到第 '+(step.index+1)+' 步 '+step.move);const done=step.index<completed;e.title='计划第 '+(step.index+1)+' 步；'+(done?'已通过物理状态验收':'尚未完成物理验收');if(done)e.classList.add('completed');$('moves').append(e)}
-$('hash').textContent='轨迹 SHA-256 / '+data.hashes['trajectory.npz'];$('download-report').href=URL.createObjectURL(new Blob([JSON.stringify({...data.report,hand_name:'xhand pro',audit:data.audit,events:data.events,source_hashes:data.hashes,model:data.provenance},null,2)],{type:'application/json'}));
+if(comparison&&data.report.full_solve){$('optimization').hidden=false;L.write($('baseline-duration'),()=>clock(comparison.baseline_seconds));L.write($('optimized-duration'),()=>clock(data.report.seconds));L.write($('time-reduction'),()=>comparison.time_reduction_percent.toFixed(1)+'%');if(Number.isFinite(comparison.baseline_interarm_seconds)&&Number.isFinite(comparison.optimized_interarm_seconds)){L.write($('handoff-force'),()=>comparison.baseline_interarm_seconds.toFixed(2)+' → '+comparison.optimized_interarm_seconds.toFixed(2)+' s')}else{L.write($('handoff-label'),()=>L.t('换握接触峰值'));L.write($('handoff-force'),()=>comparison.baseline_handoff_peak_N.toFixed(2)+' → '+comparison.optimized_handoff_peak_N.toFixed(2)+' N')};L.write($('optimization-note'),()=>L.t('退手前检查路径间隙，减少重复换握，并保留转层后的对齐检查。')+(Number.isFinite(comparison.optimized_ninth_step_seconds)?L.t('第九步由 {before} 秒缩短到 {after} 秒。',{before:comparison.baseline_ninth_step_seconds.toFixed(2),after:comparison.optimized_ninth_step_seconds.toFixed(2)}):'')+L.t('上方为真实仿真用时；双手互碰时长按相同的 50 Hz 姿态与原生网格复查。')+(comparison.optimized_nonpad_impulse_Ns>comparison.baseline_nonpad_impulse_Ns?L.t('壳体边缘等非传感器表面的累计接触冲量有所增加，完整指标保留在测试报告中。'):''));}
+for(const step of data.solution.steps){const e=document.createElement('button');L.write(e,()=>step.move);e.dataset.step=step.index;const start=data.frames.findIndex(f=>f.move_index===step.index);e.disabled=start<0;e.onclick=()=>{pause();setFrame(start)};L.attr(e,'aria-label',()=>L.t('跳到第 ')+(step.index+1)+L.t(' 步 ')+step.move);const done=step.index<completed;L.attr(e,'title',()=>L.t('计划第 ')+(step.index+1)+L.t(' 步；')+(done?L.t('已通过物理状态验收'):L.t('尚未完成物理验收')));if(done)e.classList.add('completed');$('moves').append(e)}
+L.write($('hash'),()=>L.t('轨迹 SHA-256 / ')+data.hashes['trajectory.npz']);$('download-report').href=URL.createObjectURL(new Blob([JSON.stringify({...data.report,hand_name:'xhand pro',audit:data.audit,events:data.events,source_hashes:data.hashes,model:data.provenance},null,2)],{type:'application/json'}));
 $('show-result').disabled=false;$('show-result').onclick=()=>{pause();setFrame(data.frames.length-1);setView('close')};$('play').onclick=()=>playing?pause():play();$('restart').onclick=()=>{pause();setFrame(0)};$('prev').onclick=()=>{pause();setFrame(frame-1)};$('next').onclick=()=>{pause();setFrame(frame+1)};$('timeline').oninput=e=>{pause();setFrame(+e.target.value)};$('show-contacts').onchange=e=>{contactGroup.visible=e.target.checked;dirty=true};$('follow-cube').onchange=e=>{follow=e.target.checked;if(follow&&currentView!=='wide')setFrame(frame)};
 document.querySelectorAll('[data-view]').forEach(b=>b.onclick=()=>setView(b.dataset.view));document.querySelectorAll('[data-speed]').forEach(b=>b.onclick=()=>{speed=+b.dataset.speed;document.querySelectorAll('[data-speed]').forEach(x=>{const active=x===b;x.classList.toggle('active',active);x.setAttribute('aria-pressed',String(active))})});
 document.addEventListener('keydown',e=>{if(e.target.closest('input,button,a,summary,select,textarea'))return;if(e.code==='Space'){e.preventDefault();playing?pause():play()}else if(e.key==='ArrowRight'){pause();setFrame(frame+1)}else if(e.key==='ArrowLeft'){pause();setFrame(frame-1)}else if(e.key.toLowerCase()==='r'){pause();setFrame(0)}});

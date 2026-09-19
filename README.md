@@ -4,6 +4,8 @@
 
 **Marvin dual arms · Contact-driven simulation · Six live cube faces**
 
+Created by [YIfan Hu](https://evan715823.github.io/). Chinese / English interface.
+
 [**Open the interactive replay →**](https://evan715823.github.io/xhand-pro-cube-demo/)
 
 ![Recorded simulation](assets/preview.png)
